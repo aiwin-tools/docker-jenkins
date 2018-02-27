@@ -11,8 +11,12 @@ ADD grant-jenkins-access-to-docker-socket.sh /usr/local/bin/
 ADD entrypoint.sh /usr/local/bin/
 
 RUN apt-get update \
-      && apt-get install -y sudo jq \
+      && apt-get install -y sudo python zip jq curl groff git \
       && rm -rf /var/lib/apt/lists/*
+
+RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "/tmp/get-pip.py" && \
+  python /tmp/get-pip.py && \
+  pip install awscli --ignore-installed six
 
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers \
       && chmod +x /usr/local/bin/grant-jenkins-access-to-docker-socket.sh \
