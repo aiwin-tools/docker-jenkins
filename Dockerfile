@@ -11,7 +11,7 @@ ADD grant-jenkins-access-to-docker-socket.sh /usr/local/bin/
 ADD entrypoint.sh /usr/local/bin/
 
 RUN apt-get update \
-      && apt-get install -y sudo python zip jq curl groff git \
+      && apt-get install -y sudo python zip jq curl groff git git-flow\
       && rm -rf /var/lib/apt/lists/*
 
 RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "/tmp/get-pip.py" && \
