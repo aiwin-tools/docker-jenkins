@@ -15,9 +15,9 @@ RUN apt-get update \
       && apt-get install -y sudo python zip jq curl groff git git-flow\
       && rm -rf /var/lib/apt/lists/*
 
-RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "/tmp/get-pip.py" \
-  && python /tmp/get-pip.py \
-  && pip install awscli --ignore-installed six
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip" \
+  && unzip /tmp/awscliv2.zip -d /tmp \
+  && /tmp/aws/install 
 
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers \
       && chmod +x /usr/local/bin/grant-jenkins-access-to-docker-socket.sh \
