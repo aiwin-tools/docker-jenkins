@@ -3,13 +3,13 @@ FROM jenkins/jenkins:lts
 USER root
 
 # Add Tini
-ENV TINI_VERSION v0.17.0
+ENV TINI_VERSION v0.19.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /bin/tini
 RUN chmod +x /bin/tini
 
-COPY grant-jenkins-access-to-docker-socket.sh /usr/local/bin/
-COPY entrypoint.sh /usr/local/bin/
-COPY init-git-flow.sh /usr/local/bin/
+COPY --chown=jenkins:jenkins grant-jenkins-access-to-docker-socket.sh /usr/local/bin/
+COPY --chown=jenkins:jenkins entrypoint.sh /usr/local/bin/
+COPY --chown=jenkins:jenkins init-git-flow.sh /usr/local/bin/
 
 RUN apt-get update \
       && apt-get install -y sudo python zip jq curl groff git git-flow\
